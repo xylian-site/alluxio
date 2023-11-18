@@ -212,7 +212,8 @@ public class DoraLsCommandIntegrationTest extends AbstractDoraFileSystemShellTes
     assertEquals("Output: ", linePatterns.length, actualLines.length);
 
     for (int i = 0; i < linePatterns.length; i++) {
-      assertTrue("mOutput: " + mOutput.toString(), actualLines[i].matches(linePatterns[i]));
+      assertTrue(linePatterns[i] + "\n" + actualLines[i] + "\n",
+          actualLines[i].matches(linePatterns[i]));
     }
     mOutput.reset();
   }
