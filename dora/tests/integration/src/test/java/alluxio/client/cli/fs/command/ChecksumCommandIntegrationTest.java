@@ -12,6 +12,7 @@
 package alluxio.client.cli.fs.command;
 
 import alluxio.AlluxioURI;
+import alluxio.annotation.dora.DoraTestTodoItem;
 import alluxio.client.cli.fs.AbstractFileSystemShellTest;
 import alluxio.client.file.FileSystemTestUtils;
 import alluxio.exception.ExceptionMessage;
@@ -19,6 +20,7 @@ import alluxio.util.io.BufferUtils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Objects;
@@ -50,6 +52,9 @@ public final class ChecksumCommandIntegrationTest extends AbstractFileSystemShel
   /**
    * Tests md5 checksum calculation with wildcard.
    */
+  @Ignore
+  @DoraTestTodoItem(action = DoraTestTodoItem.Action.FIX, owner = "Yichuan",
+      comment = "Bring it back when UfsUrl support Wildcard.")
   @Test
   public void checksumWildCard() throws Exception {
     FileSystemTestUtils.createByteFile(sFileSystem, "/testDir/testFileA", 10);

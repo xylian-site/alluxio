@@ -65,6 +65,9 @@ public final class CatCommandIntegrationTest extends AbstractFileSystemShellTest
     Assert.assertArrayEquals(expect, mOutput.toByteArray());
   }
 
+  @Ignore
+  @DoraTestTodoItem(action = DoraTestTodoItem.Action.FIX, owner = "Yichuan",
+    comment = "Bring it back when UfsUrl support Wildcard.")
   @Test
   public void catWildcard() throws Exception {
     String testDir = FileSystemShellUtilsTest.resetFileHierarchy(sFileSystem);

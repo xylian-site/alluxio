@@ -179,7 +179,7 @@ public class UfsUrl {
    * @param proto the proto of the UfsUrl
    */
   private UfsUrl(UfsUrlMessage proto) {
-    Preconditions.checkArgument(!proto.getScheme().isEmpty(), "scheme is not allowed to be empty,"
+    Preconditions.checkArgument(!proto.getScheme().isEmpty(), "scheme is not allowed to be empty, "
         + "please input again.");
     Preconditions.checkArgument(!proto.getScheme().equalsIgnoreCase("alluxio"),
         "Alluxio 3.x no longer supports alluxio:// scheme,"

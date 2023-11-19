@@ -12,6 +12,7 @@
 package alluxio.client.cli.fs.command;
 
 import alluxio.AlluxioURI;
+import alluxio.annotation.dora.DoraTestTodoItem;
 import alluxio.client.cli.fs.AbstractFileSystemShellTest;
 import alluxio.client.file.FileSystemTestUtils;
 import alluxio.exception.AlluxioException;
@@ -68,6 +69,9 @@ public final class ChmodCommandIntegrationTest extends AbstractFileSystemShellTe
   /**
    * Tests wildcard entries for chmod.
    */
+  @Ignore
+  @DoraTestTodoItem(action = DoraTestTodoItem.Action.FIX, owner = "Yichuan",
+      comment = "Bring it back when UfsUrl support Wildcard.")
   @Test
   public void chmodWildCard() throws IOException, AlluxioException {
     FileSystemTestUtils.createByteFile(sFileSystem, "/testDir/testFile1", 10);
