@@ -23,6 +23,7 @@ import alluxio.conf.PropertyKey;
 import alluxio.grpc.ListStatusPRequest;
 import alluxio.grpc.ListStatusPResponse;
 import alluxio.membership.MembershipManager;
+import alluxio.uri.UfsUrl;
 import alluxio.util.io.PathUtils;
 import alluxio.wire.WorkerIdentity;
 import alluxio.worker.block.BlockMasterClientPool;
@@ -152,9 +153,11 @@ public class DoraWorkerClientServiceHandlerTest {
 
   private void executeAndAssertListStatus(String path, boolean recursive, String[] expectedPaths,
                                           Boolean[] expectedIsDirectories) {
+    UfsUrl ufsUrl = UfsUrl.createInstance(PathUtils.concatWithRootDir(path, "/"));
+
     mRequest = ListStatusPRequest.newBuilder().setOptions(
             alluxio.grpc.ListStatusPOptions.newBuilder().setRecursive(recursive).build())
-        .setPath(path).build();
+        .setPath(path).setUfsPath(ufsUrl.toProto()).build();
     TestStreamObserver responseObserver = new TestStreamObserver();
     mServiceHandler.listStatus(mRequest, responseObserver);
 
