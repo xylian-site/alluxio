@@ -286,14 +286,15 @@ public class DoraCacheFileSystem extends DelegatingFileSystem {
   @Override
   public List<URIStatus> listStatus(AlluxioURI path, ListStatusPOptions options)
       throws FileDoesNotExistException, IOException, AlluxioException {
-    AlluxioURI ufsFullPath = convertToUfsPath(path);
-    ufsFullPath = new AlluxioURI(PathUtils.normalizePath(ufsFullPath.toString(), "/"));
+    // TODO(Yichuan): Double check whether the Ufsl conversion logic is appropriate to put here.
+    String rootDir = mFsContext.getClusterConf().getString(PropertyKey.DORA_CLIENT_UFS_ROOT);
+    UfsUrl ufsUrl = UfsUrl.createInstance(PathUtils.concatWithRootDir(rootDir, path.getPath()));
 
     try {
       ListStatusPOptions mergedOptions = FileSystemOptionsUtils.listStatusDefaults(
           mFsContext.getClusterConf()).toBuilder().mergeFrom(options).build();
 
-      final List<URIStatus> uriStatuses = mDoraClient.listStatus(ufsFullPath.toString(),
+      final List<URIStatus> uriStatuses = mDoraClient.listStatus(ufsUrl.toString(),
           mergedOptions);
       List<URIStatus> statusesWithRelativePath = new ArrayList<>(uriStatuses.size());
       for (URIStatus s : uriStatuses) {
@@ -315,7 +316,7 @@ public class DoraCacheFileSystem extends DelegatingFileSystem {
       UFS_FALLBACK_COUNTER.inc();
       LOG.error("Dora client list status error ({} times). Fall back to UFS.",
           UFS_FALLBACK_COUNTER.getCount(), ex);
-      return mDelegatedFileSystem.listStatus(ufsFullPath, options);
+      return mDelegatedFileSystem.listStatus(ufsUrl, options);
     }
   }
 

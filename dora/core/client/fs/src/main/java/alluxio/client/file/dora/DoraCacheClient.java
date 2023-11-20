@@ -201,6 +201,7 @@ public class DoraCacheClient {
              mContext.acquireBlockWorkerClient(getWorkerNetAddress(path))) {
       List<URIStatus> result = new ArrayList<>();
       client.get().listStatus(ListStatusPRequest.newBuilder().setPath(path)
+              .setUfsPath(UfsUrl.createInstance(path).toProto())
               .setOptions(options).build())
           .forEachRemaining(
               (pListStatusResponse) -> result.addAll(pListStatusResponse.getFileInfosList().stream()
