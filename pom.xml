@@ -902,6 +902,12 @@
     <!-- Dependencies in the compile scope. -->
     <!-- System logging. -->
     <dependency>
+      <groupId>edu.illinois</groupId>
+      <artifactId>ParameterizedWithCartesian</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
     </dependency>

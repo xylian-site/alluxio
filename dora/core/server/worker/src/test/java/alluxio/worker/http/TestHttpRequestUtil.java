@@ -16,14 +16,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import edu.illinois.ParameterizedWithCartesian;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@RunWith(Parameterized.class)
+@RunWith(ParameterizedWithCartesian.class)
 public class TestHttpRequestUtil {
 
-  @Parameterized.Parameters(name = "{index}-{0}")
+  @ParameterizedWithCartesian.Parameters
   public static Collection<Object[]> requestUris() {
     return Arrays.asList(new Object[][] {
         {"http://127.0.0.1:28080/v1/file/5f2829f08879b0e89d07174cffa8d8"
